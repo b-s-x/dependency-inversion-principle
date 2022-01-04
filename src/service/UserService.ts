@@ -20,9 +20,9 @@ export class UserService {
     return response;
   }
 
-  public getUser(url: string, params: object) {
+  public getUser(params?: any) {
     const response: Promise<Response> = this.customHttpAdapter.get(
-      new Request(url, params)
+      new Request("https://jsonplaceholder.typicode.com/users/1", params)
     );
 
     return response;
