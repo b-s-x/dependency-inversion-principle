@@ -2,18 +2,14 @@ import {
   CustomHttpRequest as Request,
   CustomHttpResponse as Response
 } from "../CustomHttp";
-import { ICustomHttp } from "../interfaces/ICustomHttp";
+import { CustomHttp, User } from "../interfaces";
 
 const PUBLIC_URL = "https://api.github.com/users";
 
-export interface IUser {
-  username: string;
-}
-
 export class UserService {
-  constructor(private readonly customHttpAdapter: ICustomHttp) {}
+  constructor(private readonly customHttpAdapter: CustomHttp) {}
 
-  public searchGithubUser(user: IUser): Promise<Response> {
+  public searchGithubUser(user: User): Promise<Response> {
     const response: Promise<Response> = this.customHttpAdapter.get(
       new Request(`${PUBLIC_URL}/${user.username}`)
     );
@@ -24,7 +20,6 @@ export class UserService {
     const response: Promise<Response> = this.customHttpAdapter.get(
       new Request("https://jsonplaceholder.typicode.com/users/1", params)
     );
-
     return response;
   }
 }
