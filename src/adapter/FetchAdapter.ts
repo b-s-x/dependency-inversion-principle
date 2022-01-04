@@ -1,10 +1,10 @@
-import { ICustomHttp } from "../interfaces/ICustomHttp";
+import { CustomHttp } from "../interfaces";
 import {
   CustomHttpRequest as Request,
   CustomHttpResponse as Response
 } from "../CustomHttp";
 
-export class FetchAdapter implements ICustomHttp {
+export class FetchAdapter implements CustomHttp {
   public async get(request: Request): Promise<Response> {
     const response = await fetch(request.path);
     const data = await response.json();
