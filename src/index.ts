@@ -1,19 +1,18 @@
 import { UserService } from "./service/UserService";
 import { AxiosAdapter } from "./adapter/AxiosAdapter";
-import { ICustomHttp } from "./interfaces/ICustomHttp";
+import { CustomHttp } from "./interfaces";
+import { USER_GITHUB } from './constants';
 
 const userServiceWithAxiosAdapter = (): UserService => {
-  const axiosAdapter: ICustomHttp = new AxiosAdapter();
+  const axiosAdapter: CustomHttp = new AxiosAdapter();
   const userService: UserService = new UserService(axiosAdapter);
 
   return userService;
 };
 
-const userGitHub = { username: "b-s-x" };
-
 const run = async () => {
   const userService = userServiceWithAxiosAdapter();
-  const responseUserGithub = await userService.searchGithubUser(userGitHub);
+  const responseUserGithub = await userService.searchGithubUser(USER_GITHUB);
   const response = await userService.getUser({ status: "666" });
   console.log(1, response.data);
   console.log(2, responseUserGithub.data);
