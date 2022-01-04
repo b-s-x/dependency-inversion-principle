@@ -3,23 +3,20 @@ import { AxiosAdapter } from "./adapter/AxiosAdapter";
 import { ICustomHttp } from "./interfaces/ICustomHttp";
 
 const userServiceWithAxiosAdapter = (): UserService => {
-  const axiosAdaper: ICustomHttp = new AxiosAdapter();
-  const userService: UserService = new UserService(axiosAdaper);
+  const axiosAdapter: ICustomHttp = new AxiosAdapter();
+  const userService: UserService = new UserService(axiosAdapter);
 
   return userService;
 };
 
-const validGithubUsername = () => {
-  return { username: "nativanando" };
-};
-
-const users = "https://jsonplaceholder.typicode.com/users/1";
+const userGitHub = { username: "b-s-x" };
 
 const run = async () => {
   const userService = userServiceWithAxiosAdapter();
-  // const user = validGithubUsername();
-  const response = await userService.getUser(users, { status: "666" });
+  const responseUserGithub = await userService.searchGithubUser(userGitHub);
+  const response = await userService.getUser({ status: "666" });
   console.log(1, response.data);
+  console.log(2, responseUserGithub.data);
 };
 
 run();
