@@ -1,11 +1,11 @@
 import axios from "axios";
-import { ICustomHttp } from "../interfaces/ICustomHttp";
+import { CustomHttp } from "../interfaces";
 import {
   CustomHttpRequest as Request,
   CustomHttpResponse as Response
 } from "../CustomHttp";
 
-export class AxiosAdapter implements ICustomHttp {
+export class AxiosAdapter implements CustomHttp {
   public async get({ path, params }: Request): Promise<Response> {
     const response = await axios.get(path, { params });
     return new Response(response.data, response.status);
